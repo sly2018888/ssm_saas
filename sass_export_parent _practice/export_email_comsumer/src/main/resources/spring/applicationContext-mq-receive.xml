@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/rabbit
+	http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--配置连接工厂-->
+    <rabbit:connection-factory id="connectionFactory" virtual-host="/sass" host="127.0.0.1"
+                               port="5672" username="sass" password="sass"/>
+    <!--定义mq管理-->
+    <rabbit:admin connection-factory="connectionFactory"/>
+    <!--申明队列-->
+    <rabbit:queue name="queue" auto-declare="true" durable="true"/>
+    <rabbit:queue name="queue1" auto-declare="true" durable="true"/>
+
+    <!--定义消费者-->
+    <bean id="emailConsumer" class="com.sly.email.EmailConsumer"></bean>
+    <bean id="BirthdayConsumer" class="com.sly.email.BirthdayConsumer"></bean>
+    <!--定义消费者监听队列-->
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="emailConsumer" queues="queue"/>
+        <rabbit:listener ref="BirthdayConsumer" queues="queue1"/>
+    </rabbit:listener-container>
+
+
+</beans>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sly.dao.system.DeptDao" >
+
+    <resultMap id="BaseResultMap" type="dept">
+        <id property="deptId" column="dept_id"></id>
+        <result property="deptName" column="dept_name" ></result>
+        <result property="state" column="state" ></result>
+        <result property="companyId" column="company_id" ></result>
+        <result property="companyName" column="company_name" ></result>
+        <association property="parent" column="parent_id" select="findByCompanyId" javaType="dept"></association>
+    </resultMap>
+
+    <select id="findAll" parameterType="String" resultMap="BaseResultMap">
+        SELECT * from pe_dept WHERE company_id=#{companyId} and is_deleted=0
+    </select>
+
+    <select id="findByCompanyId" parameterType="String" resultMap="BaseResultMap">
+        SELECT  * from pe_dept where dept_id=#{deptId} and is_deleted=0
+    </select>
+    
+    <select id="findByDeptId" parameterType="String" resultMap="BaseResultMap">
+        select * from pe_dept WHERE company_id = #{companyId} and is_deleted=0
+    </select>
+
+    <insert id="addDept" parameterType="com.sly.domain.system.Dept">
+        insert into pe_dept (dept_id,dept_name,parent_id,state,company_id,company_name) values (
+                #{deptId},#{deptName},#{parent.deptId},#{state},#{companyId},#{companyName}
+        );
+
+    </insert>
+
+    <update id="updateDept" parameterType="com.sly.domain.system.Dept">
+        UPDATE pe_dept
+        <set>
+            <if test="deptName!=null and deptName!=''">
+                dept_name = #{deptName},
+            </if>
+            <if test="parent!=null">
+                parent_id = #{parent.deptId},
+            </if>
+            <if test="state!=null and state!=''">
+                state = #{state},
+            </if>
+        </set>
+        WHERE dept_id = #{deptId}
+    </update>
+
+    <select id="findById" parameterType="String" resultMap="BaseResultMap">
+        select * from pe_dept where dept_id=#{id} and is_deleted=0
+    </select>
+
+    <update id="delete" parameterType="String">
+        UPDATE pe_dept set is_deleted = 1 WHERE dept_id = #{deptId}
+    </update>
+
+</mapper>
