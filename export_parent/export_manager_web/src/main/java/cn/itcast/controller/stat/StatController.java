@@ -44,5 +44,15 @@ public class StatController extends BaseController {
 //        sell factory online
         return statService.onlineCharts(getCompanyId());
 
+    }@RequestMapping(value = "/priceCharts",name = "货物价格统计")
+    @ResponseBody
+    public List<Map> priceCharts(){
+        return statService.priceCharts(getCompanyId());
+    }
+
+    @RequestMapping(value = "/ipOpNumCharts",name = "IP操作次数统计")
+    @ResponseBody
+    public List<Map> ipOpNumCharts(){
+        return statService.ipOpNumCharts(getCompanyId());
     }
 }

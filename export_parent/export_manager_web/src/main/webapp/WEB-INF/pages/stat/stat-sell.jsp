@@ -29,10 +29,10 @@
         </div>
     </section>
 </div>
-</body>
-
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="../../plugins/echarts/echarts.min.js"></script>
+</body>
+
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));

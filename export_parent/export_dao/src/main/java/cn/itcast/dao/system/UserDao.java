@@ -23,4 +23,6 @@ public interface UserDao {
     void deleteRoleAndUserByUserId(String userid);
 
     User findByEmail(String email);
+
+    List<User> findByDate(String nowDay);
 }
