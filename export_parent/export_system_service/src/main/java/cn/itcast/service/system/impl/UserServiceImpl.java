@@ -15,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.ws.rs.HEAD;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -51,12 +53,19 @@ public class UserServiceImpl implements UserService {
         map.put("subject", "恭喜新员工");
         map.put("content", "您现在可以使用SaaS货代云平台了，登录密码是：" + password_ming);
         amqpTemplate.convertAndSend("user.insert", map);  //d(String routingKey, Object object)
+        if (!StringUtils.isEmpty(user.getEmail())){
+            Map<String,String> map1 = new HashMap();
+            map1.put("to",user.getEmail());
+            map1.put("subject","恭喜新员工");
+            map1.put("content","您现在可以使用SaaS货代云平台了，登录密码是："+password_ming);
+            amqpTemplate.convertAndSend("user.insert",map1);  //d(String routingKey, Object object)
 //        发送邮件的任务放入到MQ中
 //        try {
 //            MailUtil.sendMsg(user.getEmail(),"恭喜新员工","您现在可以使用SaaS货代云平台了，登录密码是："+password_ming);
 //        } catch (Exception e) {
 //            System.out.println("邮件发送失败");
 //        }
+        }
     }
 
     @Override
@@ -133,6 +142,12 @@ public class UserServiceImpl implements UserService {
         System.out.println(new Md5Hash("123456", "laowang@export.com", 2).toString());
         System.out.println(new Md5Hash("123456", "xiaowang@export.com", 2).toString());
         System.out.println(new Md5Hash("123456", "xiaoer@export.com", 2).toString());
+    }
+
+    @Override
+    public User findByVx(String openId) {
+        User user = userDao.findByVxOpenId(openId);
+        return user;
     }
 
 

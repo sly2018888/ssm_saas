@@ -27,6 +27,7 @@
         <result column="update_by" property="updateBy"/>
         <result column="update_time" property="updateTime"/>
         <result column="remark" property="remark"/>
+        <result column="vx_openid" property="vxOpenid"/>
     </resultMap>
 
     <select id="findAll" parameterType="string" resultMap="BaseResultMap">
@@ -58,7 +59,8 @@
         create_time,
         update_by,
         update_time,
-        remark
+        remark,
+        vx_openid
         )
         VALUES (
         #{id},
@@ -84,7 +86,8 @@
         #{createTime} ,
         #{updateBy} ,
         #{updateTime} ,
-        #{remark}
+        #{remark},
+        #{vxOpenid}
         )
     </insert>
 
@@ -202,4 +205,8 @@
         </foreach>
     </insert>
     -->
+<!--    根据微信openID获取user,需要改动user的属性,添加字段-->
+    <select id="findByVxOpenId" parameterType="string" resultMap="BaseResultMap">
+        select * from pe_user where vx_openid = #{openId}
+    </select>
 </mapper>

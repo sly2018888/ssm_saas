@@ -24,4 +24,6 @@ public interface UserService {
     List<String> findRoleIdsByUserId(String id);
 
     User findByEmail(String email);
+
+    User findByVx(String openId);
 }
