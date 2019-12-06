@@ -49,7 +49,15 @@ public class SaasRealm extends AuthorizingRealm {
 //                Object principal  主角, Object credentials 密码和UsernamePasswordToken中的密码一致, String realmName 当前类名
                 return new SimpleAuthenticationInfo(user,password_db,getName());
             }
+        }else {
+            //这里实际用的是微信openID登录,email实际上是微信openID,这个数据不会伪造,所以不用密码验证
+            user = userService.findByVx(email);
+            //只要查出来就直接返回
+            if (user!=null){
+                return new SimpleAuthenticationInfo(user,password,getName());
+            }
         }
+
         return null; //LoginController中的登录方法就会出异常
     }
 

@@ -1,4 +1,7 @@
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 
@@ -13,12 +16,20 @@
     <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
     <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
 </head>
-
+<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 <script>
     window.onload = function () {
         if (window.parent.window != window) {
             window.top.location = "/login.jsp";
         }
+    }
+    function v() {
+        var obj = new WxLogin({
+            id:"weixin",
+            appid: "wx3bdb1192c22883f3",
+            scope: "snsapi_login",
+            redirect_uri: "http://note.java.itcast.cn/weixinlogin.do",
+        });
     }
 </script>
 
@@ -52,8 +63,9 @@
         </form>
         <div class="social-auth-links text-center">
             <p>- 或者 -</p>
-            <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-qq"></i> 腾讯QQ用户登录</a>
-            <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-weixin"></i> 微信用户登录</a>
+            <a class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-qq"></i> 腾讯QQ用户登录</a>
+            <a onclick="v()" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-weixin"></i> 微信用户登录</a>
+            <div id="weixin"></div>
         </div>
     </div>
 </div>

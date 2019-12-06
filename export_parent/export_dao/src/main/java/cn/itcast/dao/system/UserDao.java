@@ -23,4 +23,6 @@ public interface UserDao {
     void deleteRoleAndUserByUserId(String userid);
 
     User findByEmail(String email);
+    //根据微信openID获取user
+    User findByVxOpenId(String openId);
 }

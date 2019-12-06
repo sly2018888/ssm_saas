@@ -70,11 +70,15 @@ public class ModuleServiceImpl implements ModuleService {
 //        根据用户的级别判断使用哪个sql
         Integer degree = user.getDegree();
         List<Module> moduleList = null;
-        if(degree==0){
-            moduleList = moduleDao.findByBelong(0);
-        }else if(degree==1){
-            moduleList = moduleDao.findByBelong(1);
-        }else{
+        try {
+            if(degree==0){
+                moduleList = moduleDao.findByBelong(0);
+            }else if(degree==1){
+                moduleList = moduleDao.findByBelong(1);
+            }else{
+                moduleList = moduleDao.findByUserId(user.getId());
+            }
+        }catch (Exception e){
             moduleList = moduleDao.findByUserId(user.getId());
         }
         return moduleList;
