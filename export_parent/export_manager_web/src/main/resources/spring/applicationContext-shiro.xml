@@ -27,6 +27,10 @@
             <value>
 <!--                未登录时能访问login.jsp页面-->
                 /login.jsp = anon
+                /createVXUser.jsp = anon
+                /createVXUser.do = anon
+                /selectRolesByCompanyId.do = anon
+                /editVXUser.do = anon
                 /css/** = anon
                 /img/** = anon
                 /make/** = anon
