@@ -25,7 +25,7 @@
     </section>
     <section class="content">
         <div class="box box-primary">
-            <div id="main" style="width: 600px;height:400px;"></div>
+            <div id="main" style="width: 600px;height:600px;"></div>
         </div>
     </section>
 </div>
@@ -56,7 +56,8 @@
                     type: 'category',
                     data: titles,
                     axisLabel: {
-                        rotate:80
+                        interval:0,
+                        rotate:60
                     }
                 },
                 yAxis: {
@@ -64,8 +65,24 @@
                 },
                 series: [{
                     data: values,
-                    type: 'bar'
-                }]
+                    type: 'bar',
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true, //开启显示
+                                position: 'top', //在上方显示
+                                textStyle: { //数值样式
+                                    color: 'black',
+                                    fontSize: 10
+                                }
+                            }
+                        }
+                    }
+                }],
+                grid: [{
+                    left: '15%',//因旋转导致名字太长的类目造成遮蔽，可以配合这两个属性
+                    bottom:'25%'// 分别表示：距离左边距和底部的距离，具体数值按实际情况调整
+                }],
             }
         )
     });
