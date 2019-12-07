@@ -20,7 +20,7 @@
     <section class="content-header">
         <h1>
             统计分析
-            <small>产品销售统计</small>
+            <small>IP操作次数统计</small>
         </h1>
     </section>
     <section class="content">
@@ -29,34 +29,32 @@
         </div>
     </section>
 </div>
-<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="../../plugins/echarts/echarts.min.js"></script>
 </body>
 
+<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../../plugins/echarts/echarts.min.js"></script>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
 
-    $.get('/stat/sellCharts.do').done(function (data) {
-        // 使用刚指定的配置项和数据显示图表。
-        // data:[{"name":"JK040/JK1060338","value":3000},{"name":"JK041/JK1060339","value":3000},{"name":"JK1060338/JK338","value":2400}]
-        let values = [];
+    $.get('/stat/ipOpNumCharts.do').done(function (data) {
         let titles = [];
-        for (let i = 0; i < data.length; i++) {
+        let values = [];
+        for (let i = 0; i < data.length; i++){
             titles[i] = data[i].name;
             values[i] = data[i].value;
         }
+        // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(
             option = {
                 title: {
                     left: 'center',
-                    text: '产品销量排行',
+                    text: 'IP操作次数排行',
                 },
                 xAxis: {
                     type: 'category',
                     data: titles,
                     axisLabel: {
-                        interval:0,
                         rotate:60
                     }
                 },
@@ -73,7 +71,7 @@
                                 position: 'top', //在上方显示
                                 textStyle: { //数值样式
                                     color: 'black',
-                                    fontSize: 10
+                                    fontSize: 13
                                 }
                             }
                         }
@@ -81,7 +79,7 @@
                 }],
                 grid: [{
                     left: '15%',//因旋转导致名字太长的类目造成遮蔽，可以配合这两个属性
-                    bottom:'25%'// 分别表示：距离左边距和底部的距离，具体数值按实际情况调整
+                    bottom:'28%'// 分别表示：距离左边距和底部的距离，具体数值按实际情况调整
                 }],
             }
         )
