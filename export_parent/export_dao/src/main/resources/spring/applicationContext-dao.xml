@@ -13,8 +13,13 @@
     <!--dataSource-->
         <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
             <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+<<<<<<< HEAD
             <property name="url" value="jdbc:mysql://192.168.169.51:3306/sass_export_demo?characterEncoding=utf-8"/>
             <property name="username" value="huixinwei"/>
+=======
+            <property name="url" value="jdbc:mysql://192.168.169.51/sass_export_demo?characterEncoding=utf-8"/>
+            <property name="username" value="root"/>
+>>>>>>> 827c22953d34049a8664b25933b697ccf0397591
             <property name="password" value="root"/>
         </bean>
 
