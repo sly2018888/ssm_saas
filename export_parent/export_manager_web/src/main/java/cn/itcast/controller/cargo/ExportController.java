@@ -53,7 +53,7 @@ public class ExportController extends BaseController {
         ContractExample.Criteria criteria = example.createCriteria();
         criteria.andCompanyIdEqualTo(getCompanyId());
         criteria.andStateEqualTo(1);
-        if(degree==4){
+        if(degree==null||degree==4){
             criteria.andCreateByEqualTo(user.getId());
         }else if(degree==3){
             criteria.andCreateDeptEqualTo(user.getDeptId());

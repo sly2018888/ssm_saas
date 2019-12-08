@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(password);
         userDao.save(user);
 
-        Map<String, String> map = new HashMap();
+        /*Map<String, String> map = new HashMap();
         map.put("to", user.getEmail());
         map.put("subject", "恭喜新员工");
         map.put("content", "您现在可以使用SaaS货代云平台了，登录密码是：" + password_ming);
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 //        } catch (Exception e) {
 //            System.out.println("邮件发送失败");
 //        }
-        }
+        }*/
     }
 
     @Override

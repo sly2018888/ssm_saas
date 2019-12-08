@@ -13,7 +13,7 @@
     <!-- 触发器  -->
     <bean id="mailTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="jobDetail"></property>
-        <property name="cronExpression" value="0 05 20 * * ?"></property>
+        <property name="cronExpression" value="0 0 17 * * ?"></property>
     </bean>
     <!-- 总管理容器 -->
     <bean id="startQuartz" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" >

@@ -217,6 +217,7 @@ public class LoginController{
         user.setUserName(nickname);
         user.setCreateTime(new Date());
         user.setCompanyId(companyid);
+        user.setDeptId("100");
         Company company = companyService.findById(companyid);
         user.setCompanyName(company.getName());
         //保存用户保存角色
