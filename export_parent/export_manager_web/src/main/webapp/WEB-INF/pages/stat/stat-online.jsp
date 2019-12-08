@@ -26,7 +26,7 @@
     </section>
     <section class="content">
         <div class="box box-primary">
-            <div id="main" style="width: 600px;height:400px;"></div>
+            <div id="main" style="width: 600px;height:600px;"></div>
         </div>
     </section>
 </div>
@@ -62,6 +62,10 @@
                 series: [{
                     data: values,
                     type: 'line'
+                }],
+                grid: [{
+                    left: '15%',//因旋转导致名字太长的类目造成遮蔽，可以配合这两个属性
+                    bottom:'20%'// 分别表示：距离左边距和底部的距离，具体数值按实际情况调整
                 }]
             }
         )
