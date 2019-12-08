@@ -16,6 +16,15 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <!-- 页面meta /-->
+    <script>
+        function validateForm(){
+            var x=document.forms["myForm"]["userName"].value;
+            if (x==null || x==""){
+                alert("姓必须填写");
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 <div id="frameContent" class="content-wrapper" style="margin-left:0px;">
@@ -38,7 +47,7 @@
         <!--订单信息-->
         <div class="panel panel-default">
             <div class="panel-heading">用户信息</div>
-            <form id="editForm" action="/system/user/edit.do" method="post">
+            <form id="editForm" name="myForm" onsubmit="return validateForm()" action="/system/user/edit.do" method="post">
                 <input type="hidden" id="id" name="id" value="${user.id}">
                 <input type="hidden" id="deptName" name="deptName" value="${user.deptName}">
                 <div class="row data-type" style="margin: 0px">
@@ -59,12 +68,12 @@
 
                     <div class="col-md-2 title">邮箱</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="邮箱" name="email" value="${user.email}">
+                        <input type="text" class="form-control validate[required]" placeholder="邮箱" name="email" value="${user.email}">
                     </div>
 
                     <div class="col-md-2 title">密码</div>
                     <div class="col-md-4 data">
-                        <input type="password" class="form-control" placeholder="密码" name="password" value="${user.password}">
+                        <input type="password" class="form-control validate[required]" placeholder="密码" name="password" value="${user.password}">
                     </div>
 
                     <div class="col-md-2 title">薪水</div>
@@ -86,7 +95,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" placeholder="入职时间"  name="joinDate" class="form-control pull-right"
+                            <input type="text" placeholder="入职时间"  name="joinDate" class="form-control pull-right validate[required]"
                                    value="${user.joinDate}" id="datepicker">
                         </div>
                     </div>
@@ -140,13 +149,15 @@
                     </div>
                 </div>
             </form>
+
         </div>
         <!--订单信息/-->
 
         <!--工具栏-->
         <div class="box-tools text-center">
-            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存</button>
+            <button type="submit" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存</button>
             <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
+            <a href="javaScript:void(0)" onclick='submitForm()' class="btn-link">保存</a>
         </div>
         <!--工具栏/-->
 
@@ -160,6 +171,7 @@
 <script src="../../plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
 <link rel="stylesheet" href="../../css/style.css">
 <script>
+
     $('#datepicker').datepicker({
         autoclose: true,
         format: 'yyyy-mm-dd'

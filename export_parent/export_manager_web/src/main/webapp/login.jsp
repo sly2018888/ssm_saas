@@ -17,7 +17,22 @@
     <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
 </head>
 <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+
 <script>
+
+    function validateForm(){
+        var x=document.forms["myForm"]["email"].value;
+        var atpos=x.indexOf("@");
+        var dotpos=x.lastIndexOf(".");
+        if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length){
+            alert("不是一个有效的 e-mail 地址");
+            return false;
+        }
+    }
+</script>
+
+<script>
+
     window.onload = function () {
         if (window.parent.window != window) {
             window.top.location = "/login.jsp";
@@ -41,7 +56,7 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">登录系统</p>
-        <form action="/login.do" method="post">
+        <form name="myForm" onsubmit="return validateForm();" action="/login.do" method="post">
             <div class="form-group has-feedback">
                 <input type="email" name="email" class="form-control" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

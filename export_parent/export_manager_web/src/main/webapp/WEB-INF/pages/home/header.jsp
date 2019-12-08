@@ -20,7 +20,7 @@
                         <span class="label label-success">4</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">你有4个邮件</li>
+                        <li class="header">你有5个邮件</li>
                         <li>
                             <ul class="menu">
                                 <li>
@@ -92,7 +92,7 @@
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">10</span>
+                        <span class="label label-warning">9</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">你有10个新消息</li>
