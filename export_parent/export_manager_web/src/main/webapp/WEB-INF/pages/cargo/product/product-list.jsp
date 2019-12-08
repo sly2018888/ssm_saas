@@ -16,6 +16,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <!-- 页面meta /-->
+    <script src="../../../../js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 <div id="frameContent" class="content-wrapper" style="margin-left:0px;">
@@ -43,8 +44,9 @@
             <form id="editForm" action="${ctx}/cargo/contractProduct/edit.do" method="post" enctype="multipart/form-data" >
                 <input type="hidden" name="contractId" value="${contractId}">
                 <input type="hidden" name="factoryName" id="factoryName" value="${contractProduct.factoryName}">
+                <input type="hidden" name="productNo" id="productNo" value="${contractProduct.productNo}">
                 <div class="row data-type" style="margin: 0px">
-                    <div class="col-md-2 title">生产厂家</div>
+                    <a href="${ctx}/cargo/factory/list.do"><div class="col-md-2 title">生产厂家</div></a>
                     <div class="col-md-4 data">
                         <select class="form-control"  name="factoryId" id="factoryInfo" onchange="document.getElementById('factoryName').value=this.options[this.selectedIndex].text">
                             <option value="">请选择</option>
@@ -54,9 +56,36 @@
                         </select>
                     </div>
 
+                    <script>
+                        $("#factoryInfo").change(function () {
+                            // alert(this.value);
+                            let data = {id:this.value};
+                            // alert(JSON.stringify(data));
+                            let url = "${ctx}/cargo/contractProduct/link.do";
+                            $.ajax({
+                                type:"post",
+                                url:url,
+                                dataType:"json",
+                                contentType:"application/json",
+                                data:JSON.stringify(data),
+                                success:alertSuccess
+                            })
+                        });
+
+
+                        function alertSuccess(result) {
+                            document.querySelector("#productNoInfo").innerHTML='<option value="">请选择</option>';
+                            for (let no of result){
+                                document.querySelector("#productNoInfo").innerHTML+='<option value="">'+no+'</option>';
+                            }
+                        }
+                    </script>
+
                     <div class="col-md-2 title">货号</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="货号" name="productNo" value="${contractProduct.productNo}">
+                        <select class="form-control" name="productId" id="productNoInfo" onchange="document.getElementById('productNo').value=this.options[this.selectedIndex].text">
+                            <option value="">请选择</option>
+                        </select>
                     </div>
 
                     <div class="col-md-2 title">货物照片</div>

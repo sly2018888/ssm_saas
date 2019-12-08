@@ -144,6 +144,7 @@
                                 <a href="${ctx }/cargo/export/toUpdate.do?id=${o.id}">[编辑]</a>
                                 <c:if test="${o.state==2}">
                                     <a href="/cargo/export/exportPdf.do?id=${o.id}">[下载]</a>
+                                    <a href="/cargo/logistic/list.do?${o.id}">[查看物流]</a>
                                 </c:if>
                             </td>
                         </tr>
@@ -157,7 +158,7 @@
         <!-- .box-footer-->
         <div class="box-footer">
             <jsp:include page="../../common/page.jsp">
-                <jsp:param value="cargo/export/list.do" name="pageUrl"/>
+                <jsp:param value="/cargo/export/list.do" name="pageUrl"/>
             </jsp:include>
         </div>
         <!-- /.box-footer-->

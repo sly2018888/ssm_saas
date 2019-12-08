@@ -40,4 +40,6 @@ public interface ContractProductService {
 	PageInfo findAll(ContractProductExample example, int page, int size);
 
     void saveList(List<ContractProduct> productList);
+
+	List<ContractProduct> findByExample(ContractProductExample example);
 }
