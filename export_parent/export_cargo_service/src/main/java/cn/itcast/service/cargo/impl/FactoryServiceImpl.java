@@ -5,6 +5,8 @@ import cn.itcast.domain.cargo.Factory;
 import cn.itcast.domain.cargo.FactoryExample;
 import cn.itcast.service.cargo.FactoryService;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -33,6 +35,12 @@ public class FactoryServiceImpl implements FactoryService {
         return factoryDao.selectByPrimaryKey(id);
     }
 
+    @Override
+    public PageInfo findAllAndPage(FactoryExample example,int pageNum,int size) {
+        PageHelper.startPage(pageNum,size);
+        List<Factory> list = factoryDao.selectByExample(example);
+        return new PageInfo(list,5);
+    }
     @Override
     public List<Factory> findAll(FactoryExample example) {
         return factoryDao.selectByExample(example);

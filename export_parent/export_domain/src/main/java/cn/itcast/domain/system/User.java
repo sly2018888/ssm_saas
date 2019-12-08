@@ -40,5 +40,6 @@ public class User implements Serializable {
     private String updateBy   ;
     private Date updateTime;
     private String remark  ;
+    private String vxOpenid;//微信的openid
 
 }

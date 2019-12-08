@@ -202,7 +202,7 @@
     </insert>
 
     <!--根据id更新-->
-    <update id="updateByPrimaryKeySelective" parameterType="cn.itcast.domain.cargo.Factory">
+    <update id="updateByPrimaryKeySeslective" parameterType="cn.itcast.domain.cargo.Factory">
         update co_factory
         <set>
             <if test="ctype != null">

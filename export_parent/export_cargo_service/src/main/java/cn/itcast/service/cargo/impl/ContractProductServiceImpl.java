@@ -116,4 +116,10 @@ public class ContractProductServiceImpl implements ContractProductService {
            this.save(contractProduct);//保存货物数据
         }
     }
+
+    @Override
+    public List<ContractProduct> findByExample(ContractProductExample example) {
+        List<ContractProduct> list = contractProductDao.selectByExample(example);
+        return list;
+    }
 }

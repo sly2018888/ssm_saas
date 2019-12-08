@@ -18,9 +18,15 @@ public interface UserDao {
 
     List<String> findRoleIdsByUserId(String userid);
 
-    void saveUserAndRole(@Param("userid") String userid,@Param("roleid")  String roleid);
+    void saveUserAndRole(@Param("userid") String userid, @Param("roleid") String roleid);
 
     void deleteRoleAndUserByUserId(String userid);
 
     User findByEmail(String email);
+
+    //根据当日日期查找对应生日的user
+    List<User> findByDate(String nowDay);
+
+    //根据微信openID获取user
+    User findByVxOpenId(String openId);
 }

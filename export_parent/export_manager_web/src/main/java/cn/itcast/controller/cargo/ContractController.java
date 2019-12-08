@@ -48,7 +48,7 @@ public class ContractController extends BaseController {
         ContractExample example = new ContractExample();
         ContractExample.Criteria criteria = example.createCriteria();
         criteria.andCompanyIdEqualTo(getCompanyId());
-        if(degree==4){
+        if(degree==null||degree==4){
             criteria.andCreateByEqualTo(user.getId());
         }else if(degree==3){
             criteria.andCreateDeptEqualTo(user.getDeptId());

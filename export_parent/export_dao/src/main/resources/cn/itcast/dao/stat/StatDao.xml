@@ -19,4 +19,13 @@
 on soi.A1=t.hours
     </select>
 
+    <!--货物价格统计-->
+    <select id="priceCharts" parameterType="String" resultType="Map">
+        Select product_no as name,price as value from co_contract_product where company_id = #{companyId} order by price desc limit 10
+    </select>
+    <!--IP操作次数统计-->
+    <select id="ipOpNumCharts" parameterType="String" resultType="Map">
+        select ip as name,count(ip) as value from st_sys_log where company_id = #{companyId} group by ip order by count(ip) desc limit 10
+    </select>
+
 </mapper>

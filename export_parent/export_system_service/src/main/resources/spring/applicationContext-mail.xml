@@ -11,7 +11,7 @@
         <property name="protocol" value="smtp"/>
 		<!-- 发送服务器主机 -->
         <property name="host" value="smtp.sina.com"/>
-		<!-- 邮箱端口号，主流网易 新浪的邮箱服务器都是25 -->
+		<!-- 邮箱端口号，主流的邮箱服务器都是25 -->
         <property name="port" value="25" />
 		<!-- 用户名 -->
         <property name="username" value="itcast_server@sina.com"/>
@@ -25,7 +25,7 @@
         </property>
     </bean>
     
-    <bean id="springMailUtil" class="com.itcast.util.SpringMailUtil"/>
+    <bean id="springMailUtil" class="cn.itcast.utils.SpringMailUtil"/>
 	
 </beans>
 	
