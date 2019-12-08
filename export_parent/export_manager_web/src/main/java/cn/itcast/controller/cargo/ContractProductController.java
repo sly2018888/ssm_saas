@@ -15,14 +15,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/cargo/contractProduct")
@@ -164,4 +163,18 @@ public class ContractProductController extends BaseController {
         return "redirect:/cargo/contractProduct/list.do?contractId="+contractId ; //重定向到列表页面
     }
 
+
+    @RequestMapping(value = "/link",name = "根据所选的工厂查询货号")
+    @ResponseBody
+    public List<String> link(@RequestBody Map<String,Object> map){
+        String id = map.get("id").toString();
+        ContractProductExample example = new ContractProductExample();
+        example.createCriteria().andFactoryIdEqualTo(id);
+        List<ContractProduct> contractProductList = contractProductService.findByExample(example);
+        ArrayList<String> list = new ArrayList<>();
+        for (ContractProduct contractProduct : contractProductList) {
+            list.add(contractProduct.getProductNo());
+        }
+        return list;
+    }
 }
