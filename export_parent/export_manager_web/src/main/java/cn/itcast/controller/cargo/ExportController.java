@@ -28,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -180,5 +181,31 @@ public class ExportController extends BaseController {
         downloadUtil.download(byteArrayOutputStream,response,"报运单.pdf");
 
     }
+
+    @RequestMapping("/submit")
+    public String submit(String id){
+        Export export = new Export();
+        export.setId(id);
+        export.setState(1);
+        exportService.update(export);
+        return "redirect:/cargo/export/list.do";
+    }
+
+    @RequestMapping("/cancel")
+    public String cancel(String id){
+        Export export = new Export();
+        export.setId(id);
+        export.setState(0);
+        exportService.update(export);
+        return "redirect:/cargo/export/list.do";
+    }
+
+    @RequestMapping("/findById")
+    @ResponseBody
+    public Export  findById(String id){
+        Export export = exportService.findById(id);
+        return export;
+    }
+
 
 }

@@ -77,6 +77,7 @@ public class LoginController{
         User user = (User) subject.getPrincipal();
 
         session.setAttribute("loginUser",user);
+        session.setAttribute("degree",user.getDegree());
         //        根据用户查询菜单
         List<Module> moduleList = moduleService.findModuleListByUser(user);
         session.setAttribute("modules",moduleList);
@@ -244,6 +245,7 @@ public class LoginController{
         User loginUser = (User) session.getAttribute("loginUser");
         List<Module> moduleList = moduleService.findModuleListByUser(loginUser);
         session.setAttribute("modules",moduleList);
+        session.setAttribute("degree",loginUser.getDegree());
 
         //查出当前用户的可查看模块,展示到页面
         return "home/main";

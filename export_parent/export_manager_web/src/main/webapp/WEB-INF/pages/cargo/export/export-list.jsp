@@ -33,7 +33,16 @@
     function submit() {
         var id = getCheckId()
         if(id) {
-            location.href="${ctx}/cargo/export/submit.do?id="+id;
+            let url = "${ctx}/cargo/export/findById.do";
+            let data = {id:id};
+            $.post(url,data,function (result) {
+                if(result.state != 0){
+                    alert("只有草稿状态的报运单可提交!");
+                }else if(result.state == 0){
+                    location.href="${ctx}/cargo/export/submit.do?id="+id;
+                }
+            });
+
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
         }
@@ -42,7 +51,15 @@
     function cancel() {
         var id = getCheckId()
         if(id) {
-            location.href="${ctx}/cargo/export/cancel.do?id="+id;
+            let url = "${ctx}/cargo/export/findById.do";
+            let data = {id:id};
+            $.post(url,data,function (result) {
+               if(result.state == 1){
+                    location.href="${ctx}/cargo/export/cancel.do?id="+id;
+                }else{
+                    alert("只有已上报状态的报运单可取消提交!");
+                }
+            });
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
         }
@@ -51,7 +68,17 @@
     function exportE() {
         var id = getCheckId()
         if(id) {
-            location.href="${ctx}/cargo/export/exportE.do?id="+id;
+
+            let url = "${ctx}/cargo/export/findById.do";
+            let data = {id:id};
+            $.post(url,data,function (result) {
+                if(result.state == 1){
+                    location.href="${ctx}/cargo/export/exportE.do?id="+id;
+                }else{
+                    alert("只有已上报状态的报运单可电子保运!");
+                }
+            });
+
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
         }
@@ -138,6 +165,11 @@
                                 <c:if test="${o.state==0}">草稿</c:if>
                                 <c:if test="${o.state==1}"><font color="green">已上报</font></c:if>
                                 <c:if test="${o.state==2}"><font color="red">已报运</font></c:if>
+                                <c:if test="${o.state==3}"><font color="red">已被委托</font></c:if>
+                                <c:if test="${o.state==4}"><font color="red">已开发票</font></c:if>
+                                <c:if test="${o.state==5}"><font color="red">已上报财务</font></c:if>
+                                <c:if test="${o.state==6}"><font color="red">已预装箱</font></c:if>
+                                <c:if test="${o.state==7}"><font color="red">已装箱</font></c:if>
                             </td>
                             <td>
                                 <a href="${ctx }/cargo/export/toView.do?id=${o.id}">[查看]</a>
